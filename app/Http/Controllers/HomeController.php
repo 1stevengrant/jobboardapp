@@ -20,7 +20,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $jobs = Job::with('user')->get();
+        $jobs = Job::with('user')->orderBy('created_at', 'desc')->paginate(5);
         return view('welcome', compact('jobs'));
     }
 }
