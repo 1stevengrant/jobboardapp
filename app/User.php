@@ -23,4 +23,32 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /*
+        * Each user can have one or more jobs posted
+        *
+    */
+    public function jobs()
+    {
+        return $this->hasMany('App\Job');
+    }
+
+    /*
+     * Determines if the user owns a particular job
+     * @param integer $jobId
+     * @return Boolean
+     */
+
+    public function owns($jobId)
+    {
+        $job = Job::find($jobId);
+
+        if ($job->user_id == $this->id)
+        {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
 }
