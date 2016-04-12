@@ -8,7 +8,7 @@
                 </span>
 
                 <div class="pull-right">
-                    <a href="/jobs/{{ $job->id }}" class="btn btn-default">View</a>
+                    <a href="/jobs/{{ $job->id }}/{{ $job->slug }}" class="btn btn-default">View</a>
                     @include('partials.jobadmin')
                 </div>
             </li>

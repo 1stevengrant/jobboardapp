@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Edit Job: ' . $job->title . ' - Job ID ' . $job->id)
+@section('title', 'Edit Job ' . $job->title . ' - Job ID ' )
 
 @section('content')
 

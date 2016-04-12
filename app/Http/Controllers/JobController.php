@@ -59,9 +59,8 @@ class JobController extends Controller
 
         $job = $user->jobs()->save($job);
 
-        Session::flash('flash_message', 'Job successfully added!');
-
-        return back();
+        return \Redirect::route('jobs.index',
+            array($job->id))->with('flash_message', 'Your job has been added!');
     }
 
     /**
@@ -70,7 +69,7 @@ class JobController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, $slug)
     {
         $job = Job::find($id);
         return view('jobs.show', array('job' => $job));
@@ -125,8 +124,7 @@ class JobController extends Controller
 
         $job->delete();
 
-        Session::flash('flash_message', 'Job successfully deleted!');
-
-        return redirect()->route('jobs.index');
+        return \Redirect::route('jobs.index',
+            array($job->id))->with('flash_message', 'Your job has been deleted!');
     }
 }
