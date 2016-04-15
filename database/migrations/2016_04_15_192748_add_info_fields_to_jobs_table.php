@@ -1,12 +1,10 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
-
-class AddSlugToJobsTable extends Migration
+class AddInfoFieldsToJobsTable extends Migration
 {
-
     /**
      * Run the migrations.
      *
@@ -15,7 +13,7 @@ class AddSlugToJobsTable extends Migration
     public function up()
     {
         Schema::table('jobs', function (Blueprint $table) {
-            $table->string('slug')->nullable();
+            $table->string('job_type');
         });
     }
 
@@ -27,8 +25,7 @@ class AddSlugToJobsTable extends Migration
     public function down()
     {
         Schema::table('jobs', function (Blueprint $table) {
-            $table->dropColumn('slug');
+            //
         });
     }
-
 }

@@ -14,14 +14,11 @@ class CreateProfilesTable extends Migration
     {
         Schema::create('profiles', function (Blueprint $table) {
             $table->increments('id');
-            $table->text('org_type');
-            $table->text('org_url');
-            $table->text('org_twitter');
+            $table->text('org_type')->nullable();
+            $table->text('org_url')->nullable();
+            $table->text('org_twitter')->nullable();
             $table->integer('user_id')->unsigned();
             $table->timestamps();
-        });
-        Schema::table('profiles', function($table) {
-            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

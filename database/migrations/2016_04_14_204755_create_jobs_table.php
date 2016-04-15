@@ -16,12 +16,9 @@ class CreateJobsTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->integer('user_id')->unsigned();
+            $table->string('slug')->nullable();
             $table->timestamps();
         });
-        Schema::table('jobs', function($table) {
-            $table->foreign('user_id')->references('id')->on('users');
-        });
-
     }
 
     /**
