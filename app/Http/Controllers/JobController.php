@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use Carbon\Carbon;
 use Session;
 use App\Job;
 use Illuminate\Http\Request;
@@ -13,9 +14,9 @@ class JobController extends Controller
 {
     public function __construct()
     {
-//        $this->middleware('auth');
+        $this->middleware('auth', ['only' => ['create', 'edit', 'update', 'destroy']]);
         $this->middleware('jobowner', ['only' => ['edit', 'update', 'destroy']]);
-
+        
         parent::__construct();
     }
 
@@ -27,8 +28,8 @@ class JobController extends Controller
     public function index()
     {
         // display jobs posted by the current user
-        $jobs = User::find(\Auth::id())->jobs()->orderBy('created_at', 'desc')->paginate(10);
-        return view('jobs.index')->withJobs($jobs);
+        $jobs = User::find(\Auth::id())->jobs()->where('created_at', '>=', Carbon::today()->subDays(90))->orderBy('created_at', 'desc')->paginate(10);
+        return view('jobs.index', compact('jobs'));
     }
 
     /**
@@ -104,9 +105,9 @@ class JobController extends Controller
             'title' => 'required',
         ]);
 
-        $job->update([
-            'title' => $request->get('title')
-        ]);
+        $input = $request->all();
+
+        $job->fill($input)->save();
 
         return \Redirect::route('jobs.index',
             array($job->id))->with('flash_message', 'Your job has been updated!');
