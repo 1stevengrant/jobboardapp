@@ -19,9 +19,9 @@
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                {{--@if($loggedIn)--}}
-                    {{--<li><a href="{{ url('/jobs') }}">My Posted Jobs</a></li>--}}
-                {{--@endif--}}
+                @if($loggedIn)
+                    <li><a href="{{ url('/jobs') }}">My Posted Jobs</a></li>
+                @endif
                     <li><a href="{{ url('/jobs/create') }}">Post New Job</a></li>
                     <li><a href="{{ url('/api/v1/jobs') }}">Jobs API</a></li>
                 </ul>
