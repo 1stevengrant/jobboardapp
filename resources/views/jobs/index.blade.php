@@ -8,6 +8,6 @@
 
     @include('partials.alljobs')
 
-    {!! $jobs->render() !!}
+
 
 @stop
