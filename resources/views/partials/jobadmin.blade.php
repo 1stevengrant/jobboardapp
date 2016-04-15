@@ -1,16 +1,12 @@
 @if($user)
-    <div class="pull-right">
+
         @if($job->user->id == $user->id)
-            <a href="/jobs/{{ $job->id }}/edit" class="btn btn-default">Edit</a>
-            <div class="form-group">
-                {!! Form::open([
-                    'method' => 'DELETE',
-                    'route' => ['jobs.destroy', $job->id]
-                  ])
-                !!}
-                {!! Form::submit('Delete this job?', ['class' => 'btn btn-danger']) !!}
-                {!! Form::close() !!}
-            </div>
+            <a href="/jobs/{{ $job->id }}/edit" class="btn btn-default"><i class="fa fa-pencil"></i> Edit</a>
+
+            <button type="submit" onclick="return confirm('Are you sure?')" class="btn btn-danger">
+                <i class="fa fa-trash"></i> Delete Job
+            </button>
+
         @endif
-    </div>
+
 @endif
