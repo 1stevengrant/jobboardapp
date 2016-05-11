@@ -27,7 +27,7 @@ class ProfileController extends Controller
      */
     public function show($id)
     {
-        $user = User::find($id);
+        $user = $this->getUserById($id);
 
         return view('profile.show', compact('user'));
     }
@@ -40,7 +40,8 @@ class ProfileController extends Controller
      */
     public function edit($id)
     {
-
+        $user = $this->getUserById($id);
+        return view('profile.edit', compact('user'));
     }
 
     /**
@@ -52,6 +53,24 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $user = $this->getUserById($id);
+        $input = $request->all();
 
+        $user->profile->fill($input)->save();
+
+        return \Redirect::route('profile.show',
+            array($user->id))->with('flash_message', 'Your profile has been updated!');
+    }
+
+    /**
+     * Fetch user
+     * (You can extract this to repository method)
+     *
+     * @param $id
+     * @return int
+     */
+    public function getUserById($id)
+    {
+        return User::with('profile')->whereId($id)->firstOrFail();
     }
 }
