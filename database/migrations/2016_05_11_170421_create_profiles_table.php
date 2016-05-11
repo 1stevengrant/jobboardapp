@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateJobsTable extends Migration
+class CreateProfilesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,11 +12,13 @@ class CreateJobsTable extends Migration
      */
     public function up()
     {
-        Schema::create('jobs', function (Blueprint $table) {
+        Schema::create('profiles', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('title');
+            $table->text('org_type')->nullable();
+            $table->text('org_url')->nullable();
+            $table->text('org_twitter')->nullable();
+            $table->string('org_name')->nullabale();
             $table->integer('user_id')->unsigned();
-            $table->string('slug')->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +30,6 @@ class CreateJobsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('jobs');
+        Schema::drop('profiles');
     }
 }
