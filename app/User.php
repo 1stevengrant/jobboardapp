@@ -34,6 +34,14 @@ class User extends Authenticatable
     }
 
     /*
+     * Each user has a single profile
+     */
+    public function profile()
+    {
+        return $this->hasOne('App\Profile');
+    }
+
+    /*
      * Determines if the user owns a particular job
      * @param integer $jobId
      * @return Boolean
