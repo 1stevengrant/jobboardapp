@@ -27,7 +27,7 @@ class Controller extends BaseController
         view()->share('today', Carbon::today()->format('Y-m-d'));
         view()->share('beforeToday', Carbon::today()->subDays(650)->format('Y-m-d G:H:i'));
         view()->share('loggedIn', Auth::check());
-        view()->share('user', Auth::user());
+        view()->share('loggedInUser', Auth::user());
 
     }
 }
