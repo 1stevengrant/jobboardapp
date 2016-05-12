@@ -4,6 +4,7 @@ use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
+    protected $tables = ['users', 'jobs'];
     /**
      * Run the database seeds.
      *
@@ -11,6 +12,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-         $this->call(UsersTableSeeder::class);
+
+        DB::table('users')->truncate();
+        DB::table('jobs')->truncate();
+        DB::table('profiles')->truncate();
+
+        $this->call(UsersTableSeeder::class);
+        $this->call(JobsTableSeeder::class);
     }
 }
