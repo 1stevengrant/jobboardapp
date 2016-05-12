@@ -5,10 +5,6 @@
         <div class="col-md-6 col-md-offset-3">
             <h1>Edit Profile</h1>
 
-            <pre>
-                {{ $user }}
-            </pre>
-
             {{ Form::model($user, array('route' => array('profile.update', $user->id), 'method' => 'PUT')) }}
 
             <div class="form-group">
